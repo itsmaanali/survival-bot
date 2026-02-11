@@ -95,7 +95,7 @@ impl TradingEngine {
         let consecutive_losses = queries::get_consecutive_losses(&self.pool).await.unwrap_or(0);
 
         // 8. Build prompt for OpenClaw
-        let prompt = build_prompt(balance, &open_positions, &tickers, fear_greed, consecutive_losses);
+        let prompt = build_prompt(balance, &open_positions, &tickers, fear_greed, consecutive_losses, &self.config.openclaw_user_id);
 
         // 9. Send to OpenClaw and get decision
         let raw_response = match self.discord.ask(&prompt).await {

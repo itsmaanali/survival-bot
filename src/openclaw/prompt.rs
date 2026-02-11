@@ -8,11 +8,12 @@ pub fn build_prompt(
     top_tickers: &[Ticker24h],
     fear_greed_index: i32,
     consecutive_losses: i64,
+    openclaw_user_id: &str,
 ) -> String {
     let mut prompt = String::with_capacity(4096);
 
-    // Header
-    prompt.push_str("🤖 **SURVIVAL TRADING BOT — CYCLE ANALYSIS REQUEST**\n\n");
+    // Header — mention OpenClaw so it triggers a response
+    prompt.push_str(&format!("<@{}> 🤖 **SURVIVAL TRADING BOT — CYCLE ANALYSIS REQUEST**\n\n", openclaw_user_id));
 
     // Balance & Status
     prompt.push_str(&format!("💰 **Available USDC Balance:** ${:.2}\n", balance_usdc));

@@ -57,7 +57,16 @@ impl BinanceClient {
             .await
             .context("Failed to fetch Binance account")?;
 
-        let account: AccountInfo = resp.json().await.context("Failed to parse account info")?;
+        let status = resp.status();
+        let body = resp.text().await.context("Failed to read account response")?;
+
+        if !status.is_success() {
+            warn!(status = %status, body = %body, "Binance account request failed");
+            anyhow::bail!("Binance account failed ({}): {}", status, body);
+        }
+
+        let account: AccountInfo = serde_json::from_str(&body)
+            .context(format!("Failed to parse account info. Response: {}", &body[..body.len().min(500)]))?;
 
         let usdc_balance = account
             .balances

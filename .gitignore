@@ -1,0 +1,27 @@
+# Rust
+/target/
+
+# Environment
+.env
+
+# Database backups
+backups/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node (dashboard)
+dashboard/node_modules/
+dashboard/.next/
+dashboard/out/
+
+# Docker
+*.log

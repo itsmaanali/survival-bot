@@ -1,0 +1,58 @@
+[package]
+name = "survival-bot"
+version = "1.0.0"
+edition = "2021"
+authors = ["Maan"]
+description = "Survival Trading Bot — autonomous crypto trading with OpenClaw AI"
+
+[[bin]]
+name = "survival-bot"
+path = "src/main.rs"
+
+[dependencies]
+# Async runtime
+tokio = { version = "1.35", features = ["full"] }
+
+# Web framework
+axum = { version = "0.7", features = ["ws"] }
+axum-extra = { version = "0.9", features = ["typed-header"] }
+tower = "0.4"
+tower-http = { version = "0.5", features = ["cors", "trace"] }
+
+# HTTP client
+reqwest = { version = "0.11", features = ["json"] }
+
+# Database
+sqlx = { version = "0.7", features = ["runtime-tokio-rustls", "postgres", "chrono", "uuid", "migrate"] }
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Crypto (HMAC-SHA256 for Binance)
+hmac = "0.12"
+sha2 = "0.10"
+hex = "0.4"
+
+# Date/time
+chrono = { version = "0.4", features = ["serde"] }
+
+# Scheduling
+tokio-cron-scheduler = "0.10"
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+
+# Error handling
+anyhow = "1.0"
+thiserror = "1.0"
+
+# Regex for parsing OpenClaw responses
+regex = "1.10"
+
+# UUID for unique IDs
+uuid = { version = "1.6", features = ["v4", "serde"] }
+
+# Environment variables
+dotenvy = "0.15"
